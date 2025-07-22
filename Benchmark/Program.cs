@@ -6,7 +6,7 @@ using System.Linq;
 using Benchmark;
 
 
-BenchmarkRunner.Run<MediatRRecordBenchmark>();
+BenchmarkRunner.Run<ToListBenchmark>();
 
 
 
