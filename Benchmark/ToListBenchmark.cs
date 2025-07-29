@@ -5,26 +5,30 @@ namespace Benchmark;
 [MemoryDiagnoser]
 public class ToListBenchmark
 {
+    private readonly List<string> _data = [];
+    
+    
+    [Params(1000, 10000, 100000)]
+    public int Size { get; set; }
 
-    public ToListBenchmark()
+    [GlobalSetup]
+    public void Setup()
     {
-        for (var i = 0; i < 1000; i++)
+        for (var i = 0; i < Size; i++)
         {
-            Data.Add(Guid.NewGuid().ToString());
+            _data.Add(Guid.NewGuid().ToString());
         }
     }
-    
-    private readonly List<string> Data = [];
     
     [Benchmark]
     public void ToList()
     {
-      var x = Data.Select(x => x).ToList();
+      var x = _data.Select(x => x).ToList();
     }
     
     [Benchmark]
     public void CollectionSpread()
     {
-      List<string> x = [.. Data.Select(x => x)];
+      List<string> x = [.. _data.Select(x => x)];
     }
 }
