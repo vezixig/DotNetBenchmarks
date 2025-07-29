@@ -8,7 +8,7 @@ public class ToListBenchmark
     private readonly List<string> _data = [];
     
     
-    [Params(1000, 10000, 100000)]
+    [Params(1, 10, 100)]
     public int Size { get; set; }
 
     [GlobalSetup]
@@ -20,7 +20,7 @@ public class ToListBenchmark
         }
     }
     
-    [Benchmark]
+    [Benchmark(Baseline = true)]
     public void ToList()
     {
       var x = _data.Select(x => x).ToList();
